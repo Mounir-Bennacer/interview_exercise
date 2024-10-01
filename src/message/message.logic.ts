@@ -46,7 +46,7 @@ import {
   PollOption,
   RichMessageContent,
 } from './models/message.entity';
-import { ChatMessageModel } from './models/message.model';
+import { ChatMessageModel, chatMessageToObject } from './models/message.model';
 
 export interface IMessageLogic {
   create(

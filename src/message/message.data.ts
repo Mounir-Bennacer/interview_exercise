@@ -367,7 +367,10 @@ export class MessageData {
     return chatMessageToObject(updatedResult);
   }
 
-  async addTags(messageId: ObjectID, tags: string[]): Promise<ChatMessage> {
+  async addTags(
+    messageId: ObjectID,
+    tags: string[] | undefined,
+  ): Promise<ChatMessageDocument> {
     const updatedMessage = await this.chatMessageModel.findByIdAndUpdate(
       messageId,
       { $addToSet: { tags: { $each: tags } } },
