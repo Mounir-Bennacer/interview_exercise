@@ -550,7 +550,6 @@ describe('MessageLogic', () => {
     send = jest.fn();
   }
 
-
   class MockUserBlocksLogic implements IUserBlocksLogic {
     getBlockedUsers(
       userIds: ObjectID[],

@@ -119,6 +119,9 @@ export class Reaction {
 export class ChatMessageModel {
   id: ObjectID;
 
+  @Prop({ type: [String], default: undefined })
+  tags?: string[];
+
   @Prop()
   text: string;
 

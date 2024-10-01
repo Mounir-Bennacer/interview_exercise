@@ -366,4 +366,40 @@ export class MessageData {
 
     return chatMessageToObject(updatedResult);
   }
+
+  async addTags(messageId: ObjectID, tags: string[]): Promise<ChatMessage> {
+    const updatedMessage = await this.chatMessageModel.findByIdAndUpdate(
+      messageId,
+      { $addToSet: { tags: { $each: tags } } },
+      { new: true },
+    );
+
+    if (!updatedMessage) {
+      throw new Error('Message not found');
+    }
+
+    return updatedMessage;
+  }
+
+  // async updateTags(messageId: ObjectID, tags?: string[]): Promise<ChatMessage> {
+  //   if (!tags || tags.length === 0) {
+  //     return await this.chatMessageModel.findById(messageId);
+  //   }
+  //
+  //   return this.chatMessageModel.findByIdAndUpdate(
+  //     {
+  //       _id: messageId,
+  //     },
+  //     { $set: { tags: tags } },
+  //     { new: true },
+  //   );
+  // }
+  //
+  async findTags(tags: string[] | null): Promise<ChatMessage[]> {
+    if (!tags || tags.length === 0) {
+      return [];
+    }
+
+    return this.chatMessageModel.find({ tags: { $in: tags } });
+  }
 }

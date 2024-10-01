@@ -34,6 +34,7 @@ import {
 } from '../authentication/jwt.strategy';
 import { SafeguardingService } from '../safeguarding/safeguarding.service';
 import { ChatMessageDataLoader } from './message.dataloader';
+import { types } from 'joi';
 
 type ChatMessageReference = { __typename: string; id: ObjectId };
 
@@ -218,4 +219,33 @@ export class RichMessageContentResolver {
 
     return response.richContent?.poll;
   }
+
+  //INFO: happy to discuss if we want to add this feature
+  // @Mutation((): typeof ChatMessage => ChatMessage)
+  // @UseGuards(GqlAuthGuard)
+  // async addTagsToMessage(
+  //   @Args('messageId') messageId: ObjectID,
+  //   @Args('tags', { type: () => [String], nullable: true }) tags?: string[],
+  //   @AuthenticatedUser() authenticatedUser: IAuthenticatedUser,
+  // ): Promise<ChatMessage> {
+  //   return this.messageLogic.addTags(messageId, tags, authenticatedUser);
+  // }
+  //
+  // @Mutation(() => ChatMessage)
+  // @UseGuards(GqlAuthGuard)
+  // async updateMessageTags(
+  //   @Args('messageId') messageId: ObjectID,
+  //   @Args('tags', { type: () => [String], nullable: true }) tags?: string[],
+  //   @AuthenticatedUser() authenticatedUser: IAuthenticatedUser,
+  // ): Promise<ChatMessage> {
+  //   return this.messageLogic.updateTags(messageId, tags, authenticatedUser);
+  // }
+  //
+  // @Query(() => [ChatMessage])
+  // @UseGuards(GqlAuthGuard)
+  // async findMessagesByTags(
+  //   @Args('tags', { type: () => [String] }) tags: string[],
+  // ): Promise<ChatMessage[]> {
+  //   return this.messageLogic.findMessagesByTags(tags);
+  // }
 }

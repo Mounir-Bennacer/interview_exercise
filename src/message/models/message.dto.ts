@@ -113,6 +113,9 @@ export class MessageDto {
   @Field()
   text: string;
 
+  @Field(() => [String], { nullable: true })
+  tags?: string[];
+
   @Field()
   conversationId: ObjectID;
 
